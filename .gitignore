@@ -1,0 +1,13 @@
+# OSx
+.DS_Store
+.DS_Store?
+*.swp*
+*.orig*
+*cache
+.htaccess
+
+# Code specifics
+node_modules
+public/
+*.sublime-project
+*.sublime-workspace

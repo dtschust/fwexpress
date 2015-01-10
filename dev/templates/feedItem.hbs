@@ -1,0 +1,9 @@
+<div class="feed_item_header{{^read}} unread{{/read}}">
+	<span class="menu_items">
+		<a class="toggleRead{{^read}} unread{{/read}}{{#read}} read{{/read}}" href="javascript:void(0);" alt="toggle read status"></a>
+		<a class="toggleStarred{{^starred}} unstarred{{/starred}}{{#starred}} starred{{/starred}}" href="javascript:void(0);" alt="toggle starred status"></a>
+	</span>
+	<h2><a href="{{url}}">{{title}}</a></h2>
+</div>
+{{!<p>Created at {{created_at} }</p>}}
+<div class="feed_item_content{{#selected}} selected{{/selected}}">{{{body}}}</div>
