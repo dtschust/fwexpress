@@ -7,6 +7,16 @@ module.exports = function(grunt) {
       options: {},
       build: ["public"]
     },
+    jshint: {
+      all: {
+        options: {
+          jshintrc: '.jshintrc'
+        },
+        files: {
+          src: ['Gruntfile.js', 'dev/js/**/*.js', '!dev/js/lib/**/*.js', '!dev/js/00-templates.js']
+        }
+      }
+    },
     uglify: {
       options: {
         mangle: false,
@@ -106,9 +116,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
-  grunt.registerTask("dev", ['clean:build', 'handlebars:compile', 'uglify:js', 'sass:dist']);
-  grunt.registerTask("prod", ['clean:build', 'handlebars:compile', 'uglify:jsProd', 'sass:distProd']);
+  grunt.registerTask("dev", ['jshint:all', 'clean:build', 'handlebars:compile', 'uglify:js', 'sass:dist']);
+  grunt.registerTask("prod", ['jshint:all', 'clean:build', 'handlebars:compile', 'uglify:jsProd', 'sass:distProd']);
  
 };
 

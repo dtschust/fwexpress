@@ -27,10 +27,13 @@ var FeedCollection = Backbone.Collection.extend({
     this.countMap = countMap;
     var keys = Object.keys(countMap),
         i,
-        currentFeed;
+        currentFeed,
+        findFeed = function(model) {
+          return model.get('feed_id')===parseInt(keys[i], 10);
+        };
 
     for (i=0; i < keys.length; i++) {
-      currentFeed = this.find(function(model){return model.get('feed_id')===parseInt(keys[i],10)});
+      currentFeed = this.find(findFeed);
       if (currentFeed) {
         currentFeed.set('unreadCount', countMap[keys[i]]);
       }
@@ -73,10 +76,10 @@ var FeedItem = Backbone.Model.extend({
     var data = this.toJSON();
     data.created_at = prettyDate(new Date(data.created_at * 1000));
     data.body = html_sanitize(data.body,
-      function(url) { return url /* rewrite urls if needed */ },
+      function(url) { return url; /* rewrite urls if needed */ },
       function(id) { return id; /* rewrite ids, names and classes if needed */ });
     data.title = html_sanitize(data.title,
-      function(url) { return url /* rewrite urls if needed */ },
+      function(url) { return url; /* rewrite urls if needed */ },
       function(id) { return id; /* rewrite ids, names and classes if needed */ });
     
     return data;
@@ -141,10 +144,10 @@ var FeedItemView = Backbone.View.extend({
     return this;
   },
   toggleRead: function(e) {
-    e.preventDefault() & e.stopPropagation();
+    e.preventDefault() && e.stopPropagation();
   },
   toggleStarred: function(e) {
-    e.preventDefault() & e.stopPropagation();
+    e.preventDefault() && e.stopPropagation();
     var self = this;
     this.model.toggleStarred().done(function(){
       //drewFIXME try altering just the classname instead of a total rerender
@@ -152,7 +155,7 @@ var FeedItemView = Backbone.View.extend({
     });
   },
   showHide: function(e) {
-    e.preventDefault() & e.stopPropagation();
+    e.preventDefault() && e.stopPropagation();
     this.$('.feed_item_content').toggleClass('selected', this.model.toggleSelected());
   }
 });

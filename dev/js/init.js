@@ -1,5 +1,5 @@
 $(function() {
-  window.auth_token = '1634956a675120dfb0df75a1b5b5b5e5'
+  window.auth_token = '1634956a675120dfb0df75a1b5b5b5e5';
   var feedCollection = new FeedCollection();
   feedCollection.fetch({
     success: function(data) {
